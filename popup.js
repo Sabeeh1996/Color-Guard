@@ -17,7 +17,7 @@
   const currentDomainEl = document.getElementById('currentDomain');
   const openOptionsBtn = document.getElementById('openOptions');
   const modeOptions = document.querySelectorAll('.mode-option');
-  const modeRadios = document.querySelectorAll('input[name="mode"]');
+  const modeCheckboxes = document.querySelectorAll('input[type="checkbox"]');
   
   let currentSettings = null;
   
@@ -48,9 +48,13 @@
       
       // Listen for storage changes (from keyboard shortcut or other popup instances)
       chrome.storage.onChanged.addListener((changes, namespace) => {
-        if (namespace === 'sync' && changes.mode) {
-          currentSettings.mode = changes.mode.newValue;
-          updateUI();
+        if (namespace === 'sync') {
+          if (changes.enableHighContrast || changes.enableHueShift || changes.enableEdgeHighlight) {
+            if (changes.enableHighContrast) currentSettings.enableHighContrast = changes.enableHighContrast.newValue;
+            if (changes.enableHueShift) currentSettings.enableHueShift = changes.enableHueShift.newValue;
+            if (changes.enableEdgeHighlight) currentSettings.enableEdgeHighlight = changes.enableEdgeHighlight.newValue;
+            updateUI();
+          }
         }
       });
       
@@ -64,15 +68,21 @@
    * Update UI to reflect current settings
    */
   function updateUI() {
-    // Check the appropriate radio button
-    modeRadios.forEach(radio => {
-      radio.checked = (radio.value === currentSettings.mode);
-    });
+    // Update checkboxes
+    document.getElementById('mode-contrast').checked = currentSettings.enableHighContrast || false;
+    document.getElementById('mode-hue').checked = currentSettings.enableHueShift || false;
+    document.getElementById('mode-edge').checked = currentSettings.enableEdgeHighlight || false;
     
-    // Highlight active mode option
+    // Highlight active mode options
     modeOptions.forEach(option => {
       const mode = option.dataset.mode;
-      if (mode === currentSettings.mode) {
+      const isActive = (
+        (mode === 'high-contrast' && currentSettings.enableHighContrast) ||
+        (mode === 'hue-shift' && currentSettings.enableHueShift) ||
+        (mode === 'edge-highlight' && currentSettings.enableEdgeHighlight)
+      );
+      
+      if (isActive) {
         option.classList.add('active');
       } else {
         option.classList.remove('active');
@@ -85,18 +95,18 @@
    */
   function attachListeners() {
     // Mode selection change
-    modeRadios.forEach(radio => {
-      radio.addEventListener('change', handleModeChange);
+    modeCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', handleModeChange);
     });
     
     // Make entire mode-option div clickable
     modeOptions.forEach(option => {
       option.addEventListener('click', (e) => {
-        // Don't handle if clicking the radio directly (already handled)
+        // Don't handle if clicking the checkbox directly (already handled)
         if (e.target.tagName !== 'INPUT') {
-          const radio = option.querySelector('input[type="radio"]');
-          radio.checked = true;
-          radio.dispatchEvent(new Event('change'));
+          const checkbox = option.querySelector('input[type="checkbox"]');
+          checkbox.checked = !checkbox.checked;
+          checkbox.dispatchEvent(new Event('change'));
         }
       });
     });
@@ -116,14 +126,21 @@
    * Handle mode change
    */
   async function handleModeChange(e) {
-    const newMode = e.target.value;
+    const checkbox = e.target;
+    const mode = checkbox.value;
+    const isChecked = checkbox.checked;
     
     try {
-      // Update mode in current settings
-      currentSettings.mode = newMode;
+      // Update settings based on checkbox
+      if (mode === 'high-contrast') {
+        currentSettings.enableHighContrast = isChecked;
+      } else if (mode === 'hue-shift') {
+        currentSettings.enableHueShift = isChecked;
+      } else if (mode === 'edge-highlight') {
+        currentSettings.enableEdgeHighlight = isChecked;
+      }
       
       // Save to storage and notify service worker
-      // Send complete settings object to ensure contrast/hue/edge values are included
       await chrome.runtime.sendMessage({
         action: 'updateSettings',
         settings: currentSettings
@@ -132,10 +149,15 @@
       // Update UI
       updateUI();
       
-      console.log('Mode changed to:', newMode, 'with settings:', currentSettings);
+      const enabledModes = [];
+      if (currentSettings.enableHighContrast) enabledModes.push('High Contrast');
+      if (currentSettings.enableHueShift) enabledModes.push('Hue Shift');
+      if (currentSettings.enableEdgeHighlight) enabledModes.push('Edge Highlight');
+      
+      console.log('Active modes:', enabledModes.length ? enabledModes.join(' + ') : 'None', 'with settings:', currentSettings);
       
       // Show visual confirmation
-      const modeOption = document.querySelector(`.mode-option[data-mode="${newMode}"]`);
+      const modeOption = document.querySelector(`.mode-option[data-mode="${mode}"]`);
       if (modeOption) {
         modeOption.style.transform = 'scale(1.05)';
         setTimeout(() => {

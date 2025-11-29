@@ -10,7 +10,9 @@
 
 // Default settings for first-time users
 const DEFAULT_SETTINGS = {
-  mode: 'off', // 'off', 'high-contrast', 'hue-shift', 'edge-highlight'
+  enableHighContrast: false, // Enable high contrast mode
+  enableHueShift: false, // Enable hue shift mode
+  enableEdgeHighlight: false, // Enable edge highlight mode
   globalEnabled: true, // Apply to all sites vs whitelist/blacklist
   whitelist: [], // Array of domains where extension is enabled
   blacklist: [], // Array of domains where extension is disabled
@@ -34,27 +36,39 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 /**
  * Handle keyboard shortcut (Ctrl+Shift+Y by default)
- * Toggle between off and last active mode
+ * Toggle all modes on/off
  */
 chrome.commands.onCommand.addListener(async (command) => {
   if (command === 'toggle-overlay') {
-    const settings = await chrome.storage.sync.get(['mode', 'lastActiveMode']);
+    const settings = await chrome.storage.sync.get([
+      'enableHighContrast', 
+      'enableHueShift', 
+      'enableEdgeHighlight',
+      'lastEnabledStates'
+    ]);
     
-    let newMode;
-    if (settings.mode === 'off') {
-      // Turn on: restore last active mode or default to high-contrast
-      newMode = settings.lastActiveMode || 'high-contrast';
+    const anyEnabled = settings.enableHighContrast || settings.enableHueShift || settings.enableEdgeHighlight;
+    
+    if (anyEnabled) {
+      // Turn off: save current states
+      await chrome.storage.sync.set({ 
+        lastEnabledStates: {
+          enableHighContrast: settings.enableHighContrast,
+          enableHueShift: settings.enableHueShift,
+          enableEdgeHighlight: settings.enableEdgeHighlight
+        },
+        enableHighContrast: false,
+        enableHueShift: false,
+        enableEdgeHighlight: false
+      });
     } else {
-      // Turn off: save current mode as last active
-      await chrome.storage.sync.set({ lastActiveMode: settings.mode });
-      newMode = 'off';
+      // Turn on: restore last states or default to high contrast
+      const restore = settings.lastEnabledStates || { enableHighContrast: true };
+      await chrome.storage.sync.set(restore);
     }
     
-    // Update mode in storage (content scripts listen for changes)
-    await chrome.storage.sync.set({ mode: newMode });
-    
     // Notify all tabs to update their overlays
-    broadcastToAllTabs({ action: 'modeChanged', mode: newMode });
+    broadcastToAllTabs({ action: 'settingsChanged' });
   }
 });
 

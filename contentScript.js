@@ -75,45 +75,56 @@ console.log('[ColorGuard] Content script file loaded!');
   
   /**
    * Apply CSS filters directly - simple and reliable
-   * Works for high-contrast and hue-shift modes
-   * Edge-highlight uses canvas overlay for better precision
+   * Can combine multiple modes simultaneously
    */
   function applyDirectCSSFilter(settings) {
-    console.log('[ColorGuard] Applying CSS filter for mode:', settings.mode, 'with settings:', settings);
+    console.log('[ColorGuard] Applying filters with settings:', settings);
     
-    // Clear any existing filters and canvas overlays first
-    document.documentElement.style.filter = '';
-    document.documentElement.style.webkitFilter = '';
-    removeEdgeCanvas();
+    // Build combined CSS filter
+    const filters = [];
     
-    switch(settings.mode) {
-      case 'high-contrast':
-        const contrastLevel = settings.contrastLevel || 2.5;
-        const brightness = 1.0 + (contrastLevel - 1.0) * 0.1; // Slight brightness boost
-        const filterValue = `contrast(${contrastLevel}) brightness(${brightness})`;
-        document.documentElement.style.filter = filterValue;
-        document.documentElement.style.webkitFilter = filterValue;
-        console.log('[ColorGuard] ✓ High-contrast applied:', contrastLevel + 'x contrast,', brightness.toFixed(2) + 'x brightness');
-        break;
-        
-      case 'hue-shift':
-        const hueAmount = settings.hueShiftAmount || 90;
-        const saturation = 1.0 + (hueAmount / 180) * 0.5; // More hue = more saturation
-        const hueFilter = `hue-rotate(${hueAmount}deg) saturate(${saturation.toFixed(2)})`;
-        document.documentElement.style.filter = hueFilter;
-        document.documentElement.style.webkitFilter = hueFilter;
-        console.log('[ColorGuard] ✓ Hue-shift applied:', hueAmount + '° rotation,', saturation.toFixed(2) + 'x saturation');
-        break;
-        
-      case 'edge-highlight':
-        const thickness = settings.outlineThickness || 2;
-        console.log('[ColorGuard] Edge-highlight mode with', thickness + 'px thickness');
-        applyEdgeHighlight(thickness);
-        break;
-        
-      default:
-        console.log('[ColorGuard] Unknown mode:', settings.mode);
+    // High Contrast
+    if (settings.enableHighContrast) {
+      const contrastLevel = settings.contrastLevel || 2.5;
+      const brightness = 1.0 + (contrastLevel - 1.0) * 0.1;
+      filters.push(`contrast(${contrastLevel})`);
+      filters.push(`brightness(${brightness})`);
+      console.log('[ColorGuard] ✓ High-contrast:', contrastLevel + 'x contrast,', brightness.toFixed(2) + 'x brightness');
     }
+    
+    // Hue Shift
+    if (settings.enableHueShift) {
+      const hueAmount = settings.hueShiftAmount || 90;
+      const saturation = 1.0 + (hueAmount / 180) * 0.5;
+      filters.push(`hue-rotate(${hueAmount}deg)`);
+      filters.push(`saturate(${saturation.toFixed(2)})`);
+      console.log('[ColorGuard] ✓ Hue-shift:', hueAmount + '° rotation,', saturation.toFixed(2) + 'x saturation');
+    }
+    
+    // Apply combined filters
+    if (filters.length > 0) {
+      const filterValue = filters.join(' ');
+      document.documentElement.style.filter = filterValue;
+      document.documentElement.style.webkitFilter = filterValue;
+    } else {
+      document.documentElement.style.filter = '';
+      document.documentElement.style.webkitFilter = '';
+    }
+    
+    // Edge Highlight
+    if (settings.enableEdgeHighlight) {
+      const thickness = settings.outlineThickness || 2;
+      console.log('[ColorGuard] ✓ Edge-highlight:', thickness + 'px thickness');
+      applyEdgeHighlight(thickness);
+    } else {
+      removeEdgeCanvas();
+    }
+    
+    const enabledModes = [];
+    if (settings.enableHighContrast) enabledModes.push('High Contrast');
+    if (settings.enableHueShift) enabledModes.push('Hue Shift');
+    if (settings.enableEdgeHighlight) enabledModes.push('Edge Highlight');
+    console.log('[ColorGuard] Active modes:', enabledModes.length ? enabledModes.join(' + ') : 'None');
   }
   
   /**
@@ -245,12 +256,12 @@ console.log('[ColorGuard] Content script file loaded!');
       return true;
     }
     
-    if (message.action === 'modeChanged') {
-      // Keyboard shortcut or popup changed the mode
-      console.log('[ColorGuard] Mode changed to:', message.mode);
-      // Fetch latest settings to ensure we have current contrast/hue/thickness values
+    if (message.action === 'settingsChanged') {
+      // Keyboard shortcut or popup changed settings
+      console.log('[ColorGuard] Settings changed');
+      // Fetch latest settings
       chrome.storage.sync.get(null, (fullSettings) => {
-        applySettings({ ...fullSettings, mode: message.mode });
+        applySettings(fullSettings);
         sendResponse({ success: true });
       });
       return true; // Async response
@@ -283,15 +294,16 @@ console.log('[ColorGuard] Content script file loaded!');
         console.log('[ColorGuard] Storage changed:', key, '→', newValue);
       }
       
-      // Only reapply if mode is active and relevant settings changed
-      const relevantKeys = ['mode', 'contrastLevel', 'hueShiftAmount', 'outlineThickness'];
+      // Only reapply if relevant settings changed
+      const relevantKeys = [
+        'enableHighContrast', 'enableHueShift', 'enableEdgeHighlight',
+        'contrastLevel', 'hueShiftAmount', 'outlineThickness'
+      ];
       const relevantChange = Object.keys(changes).some(key => relevantKeys.includes(key));
       
-      if (relevantChange && updatedSettings.mode !== 'off') {
+      if (relevantChange) {
         console.log('[ColorGuard] Reapplying due to settings change');
         applySettings(updatedSettings);
-      } else if (changes.mode && changes.mode.newValue === 'off') {
-        deactivateOverlay();
       }
     }
   });
