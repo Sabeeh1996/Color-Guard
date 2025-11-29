@@ -18,6 +18,7 @@ A fast, non-invasive Chrome extension that helps users with red-green color blin
 
 - [Features](#-features)
 - [Installation](#-installation)
+- [Help & Documentation](#-help--documentation)
 - [Usage](#-usage)
 - [Support](#-support)
 - [Contributing](#-contributing)
@@ -56,6 +57,32 @@ A fast, non-invasive Chrome extension that helps users with red-green color blin
 - You should see the ColorGuard icon (blue with "CG") in your Chrome toolbar
 - Click it to open the popup and verify it loads correctly
 - Try the keyboard shortcut `Ctrl+Shift+Y` to toggle the overlay
+
+## 📚 Help & Documentation
+
+### Getting Help
+
+Need assistance with ColorGuard? We've got you covered:
+
+- **📖 Help Center**: Open [help.html](./help.html) from the extension folder for comprehensive documentation including:
+  - Getting Started guide
+  - Features overview
+  - Settings explained
+  - Troubleshooting tips
+  - FAQ
+  
+- **🔒 Privacy Policy**: View [privacy.html](./privacy.html) to understand our privacy-first approach
+
+- **💬 GitHub Discussions**: Ask questions and share feedback at [GitHub Discussions](https://github.com/Sabeeh1996/Color-Guard/discussions)
+
+- **🐛 Report Issues**: Found a bug? [Open an issue](https://github.com/Sabeeh1996/Color-Guard/issues) on GitHub
+
+- **📧 Email Support**: Contact us at [muhammadsabeeh1996@gmail.com](mailto:muhammadsabeeh1996@gmail.com)
+
+### Quick Access from Extension
+
+- Click extension icon → See **Help** and **Privacy** links at the bottom
+- Right-click extension icon → Options → Find links in footer
 
 ## Usage
 
