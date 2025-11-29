@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColorGuard</title>
+  <style>
+    /**
+     * Popup UI Styles
+     * Clean, accessible design with high contrast and keyboard navigation support
+     */
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 300px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      color: #202124;
+      background: #ffffff;
+    }
+    
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #202124;
+    }
+    
+    .mode-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    /* Radio button group for mode selection */
+    .mode-option {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border: 2px solid #dadce0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .mode-option:hover {
+      border-color: #1a73e8;
+      background: #f1f3f4;
+    }
+    
+    .mode-option.active {
+      border-color: #1a73e8;
+      background: #e8f0fe;
+    }
+    
+    .mode-option input[type="radio"] {
+      margin-right: 12px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    
+    .mode-option label {
+      flex: 1;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .mode-option small {
+      display: block;
+      color: #5f6368;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    
+    /* Current site status */
+    .site-status {
+      padding: 12px;
+      background: #f1f3f4;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: #5f6368;
+    }
+    
+    .site-status strong {
+      color: #202124;
+    }
+    
+    /* Action buttons */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    button {
+      padding: 10px 16px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #1a73e8;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    button:hover {
+      background: #f1f3f4;
+      border-color: #1a73e8;
+    }
+    
+    button:active {
+      background: #e8f0fe;
+    }
+    
+    button:focus {
+      outline: 2px solid #1a73e8;
+      outline-offset: 2px;
+    }
+    
+    /* Keyboard shortcut hint */
+    .shortcut-hint {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #dadce0;
+      font-size: 12px;
+      color: #5f6368;
+      text-align: center;
+    }
+    
+    .shortcut-hint kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      background: #f1f3f4;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+    }
+    
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #5f6368;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading" class="loading">Loading...</div>
+  
+  <div id="content" style="display: none;">
+    <h1>🛡️ ColorGuard</h1>
+    
+    <div class="site-status" id="siteStatus">
+      <strong>Current site:</strong> <span id="currentDomain">—</span>
+    </div>
+    
+    <div class="mode-selector">
+      <div class="mode-option" data-mode="off">
+        <input type="radio" id="mode-off" name="mode" value="off">
+        <label for="mode-off">
+          <div>Off</div>
+          <small>No accessibility modifications</small>
+        </label>
+      </div>
+      
+      <div class="mode-option" data-mode="high-contrast">
+        <input type="radio" id="mode-contrast" name="mode" value="high-contrast">
+        <label for="mode-contrast">
+          <div>High Contrast</div>
+          <small>Increase contrast for better visibility</small>
+        </label>
+      </div>
+      
+      <div class="mode-option" data-mode="hue-shift">
+        <input type="radio" id="mode-hue" name="mode" value="hue-shift">
+        <label for="mode-hue">
+          <div>Hue Shift</div>
+          <small>Adjust red/green colors for color blindness</small>
+        </label>
+      </div>
+      
+      <div class="mode-option" data-mode="edge-highlight">
+        <input type="radio" id="mode-edge" name="mode" value="edge-highlight">
+        <label for="mode-edge">
+          <div>Edge Highlight</div>
+          <small>Emphasize boundaries of UI elements</small>
+        </label>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button id="openOptions">⚙️ Advanced Options</button>
+    </div>
+    
+    <div class="shortcut-hint">
+      Keyboard shortcut: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Y</kbd>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

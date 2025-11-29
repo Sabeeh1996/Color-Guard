@@ -1,0 +1,95 @@
+/**
+ * ColorGuard Overlay Styles
+ * 
+ * Provides minimal CSS for overlay container and edge-highlight canvas
+ * Designed to be non-invasive and not interfere with page layout
+ */
+
+/* Main overlay container - covers entire viewport but doesn't block interactions by default */
+.colorguard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Allow clicks to pass through unless captureClicks is enabled */
+  z-index: 2147483647; /* Maximum z-index to stay on top */
+  overflow: hidden;
+}
+
+/* Canvas for edge-highlight mode */
+.colorguard-edge-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Use mix-blend-mode for better visual blending with page content */
+  mix-blend-mode: difference;
+  opacity: 0.9;
+}
+
+/* Mode-specific overlay adjustments */
+.mode-high-contrast {
+  /* High-contrast mode modifies document root filter, no additional overlay styles needed */
+}
+
+.mode-hue-shift {
+  /* Hue-shift mode modifies document root filter, no additional overlay styles needed */
+}
+
+.mode-edge-highlight {
+  /* Edge-highlight mode uses canvas, ensure it's visible */
+}
+
+/**
+ * Accessibility: Ensure overlay doesn't interfere with screen readers
+ * or keyboard navigation unless explicitly capturing interactions
+ */
+.colorguard-overlay[aria-hidden="true"] {
+  /* Screen readers should ignore this element */
+}
+
+/**
+ * Optional: Fade-in animation for smooth mode transitions
+ * Can be enabled in future versions for better UX
+ */
+/*
+.colorguard-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.colorguard-overlay.active {
+  opacity: 1;
+}
+*/
+
+/**
+ * Performance optimization: Use will-change for animated properties
+ * Only apply when edge-highlight mode is active to avoid memory overhead
+ */
+.mode-edge-highlight .colorguard-edge-canvas {
+  will-change: transform;
+}
+
+/**
+ * Handle print media: Hide overlay when printing
+ * Ensures printed pages show original content without accessibility modifications
+ */
+@media print {
+  .colorguard-overlay {
+    display: none !important;
+  }
+}
+
+/**
+ * Responsive: Ensure overlay works correctly on mobile devices
+ */
+@media (max-width: 768px) {
+  .colorguard-overlay {
+    /* Mobile devices may need position: fixed to handle scrolling correctly */
+    position: fixed;
+  }
+}

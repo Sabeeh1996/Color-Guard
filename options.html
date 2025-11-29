@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ColorGuard Options</title>
+  <style>
+    /**
+     * Options Page Styles
+     * Clean, accessible layout with clear sections and controls
+     */
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      color: #202124;
+      background: #f8f9fa;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+    
+    header {
+      background: #ffffff;
+      padding: 24px;
+      margin: -32px -24px 32px;
+      border-bottom: 1px solid #dadce0;
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .subtitle {
+      color: #5f6368;
+      font-size: 14px;
+    }
+    
+    .section {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #202124;
+    }
+    
+    .setting-group {
+      margin-bottom: 24px;
+    }
+    
+    .setting-group:last-child {
+      margin-bottom: 0;
+    }
+    
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #202124;
+    }
+    
+    .help-text {
+      display: block;
+      font-size: 12px;
+      color: #5f6368;
+      margin-top: 4px;
+    }
+    
+    /* Range sliders */
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    input[type="range"] {
+      flex: 1;
+      height: 6px;
+      border-radius: 3px;
+      background: #dadce0;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1a73e8;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1a73e8;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    input[type="range"]:focus::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+    }
+    
+    .slider-value {
+      min-width: 60px;
+      text-align: right;
+      font-weight: 600;
+      color: #1a73e8;
+    }
+    
+    /* Checkbox toggle switches */
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #dadce0;
+      transition: 0.3s;
+      border-radius: 24px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+    
+    .toggle input:checked + .toggle-slider {
+      background-color: #1a73e8;
+    }
+    
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+    
+    .toggle input:focus + .toggle-slider {
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+    }
+    
+    /* Domain list */
+    .domain-list-container {
+      margin-top: 12px;
+    }
+    
+    .domain-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    }
+    
+    button {
+      padding: 10px 20px;
+      border: 1px solid #dadce0;
+      border-radius: 6px;
+      background: #1a73e8;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    button:hover {
+      background: #1557b0;
+    }
+    
+    button:active {
+      background: #0d47a1;
+    }
+    
+    button:focus {
+      outline: 2px solid #1a73e8;
+      outline-offset: 2px;
+    }
+    
+    button.secondary {
+      background: #ffffff;
+      color: #1a73e8;
+    }
+    
+    button.secondary:hover {
+      background: #f1f3f4;
+    }
+    
+    .domain-list {
+      list-style: none;
+      margin-top: 8px;
+    }
+    
+    .domain-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: #f1f3f4;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    
+    .domain-item button {
+      padding: 6px 12px;
+      font-size: 12px;
+      background: #ea4335;
+    }
+    
+    .domain-item button:hover {
+      background: #d33b2c;
+    }
+    
+    /* Save notification */
+    .save-notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 16px 24px;
+      background: #137333;
+      color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .save-notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: #5f6368;
+      font-size: 13px;
+    }
+    
+    .footer a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛡️ ColorGuard Options</h1>
+    <p class="subtitle">Configure accessibility settings for optimal viewing experience</p>
+  </header>
+  
+  <div class="container">
+    <!-- Mode Settings -->
+    <section class="section">
+      <h2>Accessibility Mode Settings</h2>
+      
+      <div class="setting-group">
+        <label for="contrastLevel">
+          High-Contrast Level
+          <span class="help-text">Multiplier for contrast enhancement (1.0 = normal, 3.0 = maximum)</span>
+        </label>
+        <div class="slider-container">
+          <input type="range" id="contrastLevel" min="1" max="3" step="0.1" value="2.5">
+          <span class="slider-value" id="contrastValue">2.5x</span>
+        </div>
+      </div>
+      
+      <div class="setting-group">
+        <label for="hueShiftAmount">
+          Hue Shift Amount
+          <span class="help-text">Degrees to rotate hue for red-green color blindness (0° - 180°)</span>
+        </label>
+        <div class="slider-container">
+          <input type="range" id="hueShiftAmount" min="0" max="180" step="5" value="90">
+          <span class="slider-value" id="hueValue">90°</span>
+        </div>
+      </div>
+      
+      <div class="setting-group">
+        <label for="outlineThickness">
+          Edge Outline Thickness
+          <span class="help-text">Line width for edge highlighting (1 - 5 pixels)</span>
+        </label>
+        <div class="slider-container">
+          <input type="range" id="outlineThickness" min="1" max="5" step="1" value="2">
+          <span class="slider-value" id="outlineValue">2px</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Site Management -->
+    <section class="section">
+      <h2>Site Management</h2>
+      
+      <div class="setting-group">
+        <div class="toggle-container">
+          <label class="toggle">
+            <input type="checkbox" id="globalEnabled">
+            <span class="toggle-slider"></span>
+          </label>
+          <label for="globalEnabled">
+            Enable on all sites
+            <span class="help-text">When off, use whitelist. When on, use blacklist to exclude sites.</span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="setting-group" id="whitelistSection">
+        <label>
+          Whitelist (enabled sites only)
+          <span class="help-text">Add domains where ColorGuard should be active</span>
+        </label>
+        <div class="domain-list-container">
+          <div class="domain-input-row">
+            <input type="text" id="whitelistInput" placeholder="example.com">
+            <button id="addWhitelist" class="secondary">Add</button>
+          </div>
+          <ul class="domain-list" id="whitelistDomains"></ul>
+        </div>
+      </div>
+      
+      <div class="setting-group" id="blacklistSection">
+        <label>
+          Blacklist (exclude these sites)
+          <span class="help-text">Add domains where ColorGuard should NOT run</span>
+        </label>
+        <div class="domain-list-container">
+          <div class="domain-input-row">
+            <input type="text" id="blacklistInput" placeholder="example.com">
+            <button id="addBlacklist" class="secondary">Add</button>
+          </div>
+          <ul class="domain-list" id="blacklistDomains"></ul>
+        </div>
+      </div>
+      
+      <div class="setting-group">
+        <button id="addCurrentSite" class="secondary">➕ Add Current Site</button>
+      </div>
+    </section>
+    
+    <!-- Advanced Settings -->
+    <section class="section">
+      <h2>Advanced Settings</h2>
+      
+      <div class="setting-group">
+        <div class="toggle-container">
+          <label class="toggle">
+            <input type="checkbox" id="captureClicks">
+            <span class="toggle-slider"></span>
+          </label>
+          <label for="captureClicks">
+            Capture clicks on overlay
+            <span class="help-text">Enable if overlay should intercept pointer events (may affect page interactions)</span>
+          </label>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Save Button -->
+    <section class="section">
+      <button id="saveSettings" style="width: 100%;">💾 Save All Settings</button>
+    </section>
+    
+    <footer class="footer">
+      <p>
+        <strong>Privacy Note:</strong> ColorGuard only modifies page visuals locally on your device.
+        No page content is sent to external servers.
+      </p>
+      <p style="margin-top: 8px;">
+        <a href="https://github.com/yourusername/colorguard" target="_blank">Documentation</a> •
+        <a href="https://github.com/yourusername/colorguard/issues" target="_blank">Report Issue</a>
+      </p>
+    </footer>
+  </div>
+  
+  <div class="save-notification" id="saveNotification">
+    ✓ Settings saved successfully!
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
