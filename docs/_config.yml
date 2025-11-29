@@ -1,0 +1,5 @@
+theme: jekyll-theme-cayman
+title: ColorGuard
+description: Color-Blind Accessibility Layer for Chrome
+show_downloads: true
+google_analytics: 

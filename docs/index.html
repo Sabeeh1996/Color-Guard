@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ColorGuard - Chrome extension for color-blind accessibility. High contrast, hue shift, and edge highlighting modes.">
+    <meta name="keywords" content="color blind, accessibility, chrome extension, color blindness, deuteranopia, protanopia">
+    <meta name="author" content="Sabeeh">
+    <title>ColorGuard - Color-Blind Accessibility Layer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="../icons/icon32.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../icons/icon48.png" alt="ColorGuard Logo" class="logo">
+                <span class="brand-name">ColorGuard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#install">Install</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank" class="btn-github">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Make the Web Accessible for Everyone</h1>
+                <p class="hero-subtitle">A fast, privacy-first Chrome extension that helps users with color blindness and low vision by providing customizable accessibility overlays.</p>
+                <div class="hero-buttons">
+                    <a href="#install" class="btn btn-primary">Install Extension</a>
+                    <a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                </div>
+                <div class="hero-badges">
+                    <img src="https://img.shields.io/badge/Chrome-Extension-blue?logo=google-chrome" alt="Chrome Extension">
+                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License">
+                    <img src="https://img.shields.io/github/stars/Sabeeh1996/Color-Guard?style=social" alt="GitHub Stars">
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="browser-mockup">
+                    <div class="browser-bar">
+                        <div class="browser-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                    </div>
+                    <div class="browser-content">
+                        <img src="screenshot.png" alt="ColorGuard Screenshot" onerror="this.style.display='none'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features for Better Accessibility</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>High-Contrast Mode</h3>
+                    <p>Boost contrast without distorting page layout. Perfect for users with low vision.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌈</div>
+                    <h3>Hue-Shift Mode</h3>
+                    <p>Adjust red/green colors to distinguishable hues for color-blind users (Deuteranopia, Protanopia).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <h3>Edge-Highlight Mode</h3>
+                    <p>Emphasize boundaries of interactive UI elements like buttons and links.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Uses GPU-accelerated CSS filters. Minimal performance impact on browsing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy-First</h3>
+                    <p>All processing happens locally. No data leaves your device. No tracking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Fully Customizable</h3>
+                    <p>Adjust contrast levels, hue rotation, outline thickness. Per-site whitelist/blacklist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Install Extension</h3>
+                    <p>Add ColorGuard to Chrome in seconds. No account required.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Choose Your Mode</h3>
+                    <p>Click the icon and select High Contrast, Hue Shift, or Edge Highlight.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Browse Freely</h3>
+                    <p>Changes apply instantly to all tabs. Use Ctrl+Shift+Y to quickly toggle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="install" class="install">
+        <div class="container">
+            <h2 class="section-title">Get Started in Minutes</h2>
+            <div class="install-options">
+                <div class="install-card">
+                    <h3>📦 Install from Source</h3>
+                    <ol class="install-steps">
+                        <li>Clone or download the <a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank">GitHub repository</a></li>
+                        <li>Open Chrome and navigate to <code>chrome://extensions/</code></li>
+                        <li>Enable <strong>Developer Mode</strong> (toggle in top-right)</li>
+                        <li>Click <strong>"Load unpacked"</strong> and select the folder</li>
+                        <li>Pin the extension to your toolbar</li>
+                    </ol>
+                    <a href="https://github.com/Sabeeh1996/Color-Guard/archive/refs/heads/main.zip" class="btn btn-primary">Download ZIP</a>
+                </div>
+                <div class="install-card">
+                    <h3>🎯 Quick Setup</h3>
+                    <div class="video-placeholder">
+                        <p>📹 Video tutorial coming soon!</p>
+                    </div>
+                    <p class="install-note">Watch a step-by-step guide on installing and configuring ColorGuard for your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="support">
+        <div class="container">
+            <h2 class="section-title">Support ColorGuard</h2>
+            <div class="support-grid">
+                <div class="support-card">
+                    <h3>💖 Sponsor on GitHub</h3>
+                    <p>Help maintain and improve ColorGuard with new features and better accessibility support.</p>
+                    <a href="https://github.com/sponsors/Sabeeh1996" target="_blank" class="btn btn-sponsor">Become a Sponsor</a>
+                </div>
+                <div class="support-card">
+                    <h3>⭐ Star the Project</h3>
+                    <p>Help others discover ColorGuard by starring the repository on GitHub.</p>
+                    <a href="https://github.com/Sabeeh1996/Color-Guard/stargazers" target="_blank" class="btn btn-secondary">Give a Star</a>
+                </div>
+                <div class="support-card">
+                    <h3>🐛 Report Issues</h3>
+                    <p>Found a bug or have a feature request? Let us know on GitHub Issues.</p>
+                    <a href="https://github.com/Sabeeh1996/Color-Guard/issues" target="_blank" class="btn btn-secondary">Report Issue</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Is ColorGuard free?</h3>
+                    <p>Yes! ColorGuard is 100% free and open-source under the MIT license.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Does it work on all websites?</h3>
+                    <p>ColorGuard works on most websites. It cannot run on Chrome internal pages (chrome://) or some sites with strict security policies.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Will it slow down my browsing?</h3>
+                    <p>No! ColorGuard uses GPU-accelerated CSS filters with minimal performance impact.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is my data safe?</h3>
+                    <p>Absolutely! All processing happens locally on your device. No data is sent to external servers.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I customize the settings?</h3>
+                    <p>Yes! Adjust contrast levels, hue rotation, outline thickness, and create per-site rules.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I get help?</h3>
+                    <p>Check our <a href="https://github.com/Sabeeh1996/Color-Guard#readme" target="_blank">documentation</a> or open an issue on GitHub.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ColorGuard</h4>
+                    <p>Making the web accessible for everyone.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/Sabeeh1996" target="_blank" aria-label="Twitter">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/Sabeeh1996/Color-Guard#readme" target="_blank">Documentation</a></li>
+                        <li><a href="https://github.com/Sabeeh1996/Color-Guard/issues" target="_blank">Report Bug</a></li>
+                        <li><a href="https://github.com/Sabeeh1996/Color-Guard/discussions" target="_blank">Discussions</a></li>
+                        <li><a href="https://github.com/Sabeeh1996/Color-Guard/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/Sabeeh1996/Color-Guard/blob/main/LICENSE" target="_blank">License (MIT)</a></li>
+                        <li><a href="https://github.com/Sabeeh1996/Color-Guard/blob/main/CODE_OF_CONDUCT.md" target="_blank">Code of Conduct</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:sabeeh.colorguard@gmail.com">Email Support</a></li>
+                        <li><a href="https://github.com/sponsors/Sabeeh1996" target="_blank">Sponsor</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ColorGuard. Made with ❤️ for a more accessible web.</p>
+                <p>Open-source project by <a href="https://github.com/Sabeeh1996" target="_blank">Sabeeh</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
