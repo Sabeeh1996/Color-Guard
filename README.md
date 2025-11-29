@@ -1,8 +1,34 @@
 # 🛡️ ColorGuard — Color-Blind Accessibility Layer
 
+<div align="center">
+
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension-blue?logo=google-chrome)](https://github.com/Sabeeh1996/Color-Guard)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-❤-red?logo=github-sponsors)](https://github.com/sponsors/Sabeeh1996)
+[![Issues](https://img.shields.io/github/issues/Sabeeh1996/Color-Guard)](https://github.com/Sabeeh1996/Color-Guard/issues)
+[![Stars](https://img.shields.io/github/stars/Sabeeh1996/Color-Guard?style=social)](https://github.com/Sabeeh1996/Color-Guard/stargazers)
+
+</div>
+
 A fast, non-invasive Chrome extension that helps users with red-green color blindness and low vision by providing customizable accessibility overlays.
 
-## Features
+---
+
+## 📋 Table of Contents
+
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Support](#-support)
+- [Contributing](#-contributing)
+- [Roadmap](#-roadmap)
+- [FAQ](#-faq)
+- [Contact](#-contact)
+- [License](#-license)
+
+---
+
+## ✨ Features
 
 - **High-Contrast Mode** — Increases contrast without distorting page layout
 - **Hue-Shift Mode** — Adjusts red/green colors to distinguishable hues for color-blind users
@@ -252,15 +278,43 @@ The Edge-Highlight mode uses a lightweight DOM-based approach:
 - ✅ **Opera** 74+ (Chromium-based)
 - ❌ **Firefox** (requires Manifest V2 port)
 
-## Contributing
+## 💖 Support
 
-Contributions welcome! To contribute:
+If ColorGuard has helped make the web more accessible for you, consider supporting the project:
 
-1. Fork this repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes and test thoroughly
-4. Commit with clear messages: `git commit -m "Add feature X"`
-5. Push and open a Pull Request
+### GitHub Sponsors
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-❤-red?logo=github-sponsors)](https://github.com/sponsors/Sabeeh1996)
+
+Your sponsorship helps maintain and improve ColorGuard with new features and better accessibility support.
+
+### Other Ways to Support
+- ⭐ **Star this repository** to help others discover it
+- 🐛 **Report bugs** to help improve the extension
+- 📢 **Share** with friends who might benefit from it
+- 💬 **Leave feedback** about your experience
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome and appreciated! Here's how you can help:
+
+### Ways to Contribute
+- 🐛 **Report bugs** via [GitHub Issues](https://github.com/Sabeeh1996/Color-Guard/issues)
+- 💡 **Suggest features** that would improve accessibility
+- 📝 **Improve documentation** for better clarity
+- 🔧 **Submit pull requests** with enhancements or fixes
+- 🌍 **Translate** the extension to other languages
+
+### Development Process
+
+1. **Fork** this repository
+2. **Clone** your fork: `git clone https://github.com/YOUR-USERNAME/Color-Guard.git`
+3. **Create a feature branch**: `git checkout -b feature-name`
+4. **Make your changes** and test thoroughly
+5. **Commit** with clear messages: `git commit -m "Add feature X"`
+6. **Push** to your fork: `git push origin feature-name`
+7. **Open a Pull Request** with detailed description
 
 ### Development Tips
 
@@ -269,24 +323,99 @@ Contributions welcome! To contribute:
 - Test with DevTools Network throttling for slow connections
 - Verify cleanup: toggle overlay rapidly and check for memory leaks
 
-## License
+---
 
-MIT License — See LICENSE file for details
+## 🗺️ Roadmap
 
-## Support
+### Planned Features
+- [ ] Additional color-blind modes (Deuteranopia, Protanopia, Tritanopia presets)
+- [ ] AI-powered image recoloring for better contrast
+- [ ] Screen reader integration
+- [ ] Customizable keyboard shortcuts
+- [ ] Dark mode overlay option
+- [ ] Export/import settings
+- [ ] Multi-language support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/colorguard/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/colorguard/discussions)
-- **Email**: support@colorguard.example.com
+### Future Enhancements
+- [ ] WebGL-based Sobel edge detection
+- [ ] Real-time video filter support
+- [ ] Sync settings across devices
+- [ ] Browser extension for Firefox and Safari
 
-## Acknowledgments
-
-- Inspired by accessibility needs of color-blind users
-- Thanks to the Chrome Extensions team for Manifest V3 documentation
-- Shoutout to accessibility advocates worldwide
+**Vote for features** in [GitHub Discussions](https://github.com/Sabeeh1996/Color-Guard/discussions)!
 
 ---
 
+## ❓ FAQ
+
+### How do I use ColorGuard?
+1. Click the ColorGuard icon in your Chrome toolbar
+2. Select a mode (High Contrast, Hue Shift, or Edge Highlight)
+3. The changes apply instantly without refreshing the page
+4. Use `Ctrl+Shift+Y` to quickly toggle on/off
+
+### Does ColorGuard work on all websites?
+ColorGuard works on most websites. However, it cannot run on:
+- Chrome internal pages (`chrome://` URLs)
+- Chrome Web Store pages
+- Some sites with strict Content Security Policies
+
+### Will ColorGuard slow down my browsing?
+No! ColorGuard uses GPU-accelerated CSS filters and processes only visible elements. Performance impact is minimal.
+
+### Is my data safe?
+Yes! ColorGuard processes everything locally on your device. No data is sent to external servers, and we don't collect any usage information.
+
+### Can I use ColorGuard on mobile?
+Currently, ColorGuard is only available for desktop Chrome browsers. Mobile support may come in future versions.
+
+### How do I report bugs or request features?
+Open an issue on our [GitHub Issues page](https://github.com/Sabeeh1996/Color-Guard/issues) with detailed information.
+
+---
+
+## 📞 Contact
+
+### Get Help
+- 📖 **Documentation**: [GitHub Wiki](https://github.com/Sabeeh1996/Color-Guard/wiki)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Sabeeh1996/Color-Guard/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/Sabeeh1996/Color-Guard/discussions)
+- 📧 **Email**: sabeeh.colorguard@gmail.com
+
+### Links
+- 🔗 **GitHub Repository**: [https://github.com/Sabeeh1996/Color-Guard](https://github.com/Sabeeh1996/Color-Guard)
+- 💰 **Sponsor**: [GitHub Sponsors](https://github.com/sponsors/Sabeeh1996)
+- 🌟 **Star the Project**: [Give us a star](https://github.com/Sabeeh1996/Color-Guard/stargazers) if you find ColorGuard helpful!
+
+### Social Media
+- 🐦 **Twitter**: [@Sabeeh1996](https://twitter.com/Sabeeh1996)
+- 💼 **LinkedIn**: [Connect with me](https://linkedin.com/in/sabeeh1996)
+
+---
+
+## 📄 License
+
+MIT License — See [LICENSE](./LICENSE) file for details.
+
+Copyright (c) 2025 Sabeeh
+
+---
+
+## 🙏 Acknowledgments
+
+- Inspired by the accessibility needs of color-blind users worldwide
+- Thanks to the Chrome Extensions team for comprehensive Manifest V3 documentation
+- Shoutout to accessibility advocates and organizations making the web inclusive for everyone
+- Special thanks to all contributors and supporters of this project
+
+---
+
+<div align="center">
+
 **Made with ❤️ for a more accessible web**
+
+If ColorGuard helps you, please consider [⭐ starring the repository](https://github.com/Sabeeh1996/Color-Guard) and [💖 sponsoring the project](https://github.com/sponsors/Sabeeh1996)!
+
+</div>
 
 *Last updated: November 29, 2025*
