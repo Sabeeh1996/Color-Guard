@@ -76,41 +76,110 @@ console.log('[ColorGuard] Content script file loaded!');
   /**
    * Apply CSS filters directly - simple and reliable
    * Works for high-contrast and hue-shift modes
+   * Edge-highlight uses canvas overlay for better precision
    */
   function applyDirectCSSFilter(settings) {
-    console.log('[ColorGuard] Applying CSS filter for mode:', settings.mode);
+    console.log('[ColorGuard] Applying CSS filter for mode:', settings.mode, 'with settings:', settings);
     
-    // Clear any existing filters first
+    // Clear any existing filters and canvas overlays first
     document.documentElement.style.filter = '';
     document.documentElement.style.webkitFilter = '';
+    removeEdgeCanvas();
     
     switch(settings.mode) {
       case 'high-contrast':
         const contrastLevel = settings.contrastLevel || 2.5;
-        const filterValue = `contrast(${contrastLevel}) brightness(1.1)`;
+        const brightness = 1.0 + (contrastLevel - 1.0) * 0.1; // Slight brightness boost
+        const filterValue = `contrast(${contrastLevel}) brightness(${brightness})`;
         document.documentElement.style.filter = filterValue;
         document.documentElement.style.webkitFilter = filterValue;
-        console.log('[ColorGuard] ✓ High-contrast applied:', contrastLevel + 'x');
-        console.log('[ColorGuard] Filter value:', document.documentElement.style.filter);
+        console.log('[ColorGuard] ✓ High-contrast applied:', contrastLevel + 'x contrast,', brightness.toFixed(2) + 'x brightness');
         break;
         
       case 'hue-shift':
         const hueAmount = settings.hueShiftAmount || 90;
-        const hueFilter = `hue-rotate(${hueAmount}deg) saturate(1.3)`;
+        const saturation = 1.0 + (hueAmount / 180) * 0.5; // More hue = more saturation
+        const hueFilter = `hue-rotate(${hueAmount}deg) saturate(${saturation.toFixed(2)})`;
         document.documentElement.style.filter = hueFilter;
         document.documentElement.style.webkitFilter = hueFilter;
-        console.log('[ColorGuard] ✓ Hue-shift applied:', hueAmount + '°');
-        console.log('[ColorGuard] Filter value:', document.documentElement.style.filter);
+        console.log('[ColorGuard] ✓ Hue-shift applied:', hueAmount + '° rotation,', saturation.toFixed(2) + 'x saturation');
         break;
         
       case 'edge-highlight':
-        console.log('[ColorGuard] Edge-highlight mode - simple outline version');
-        document.documentElement.style.filter = 'drop-shadow(0 0 2px yellow)';
-        document.documentElement.style.webkitFilter = 'drop-shadow(0 0 2px yellow)';
+        const thickness = settings.outlineThickness || 2;
+        console.log('[ColorGuard] Edge-highlight mode with', thickness + 'px thickness');
+        applyEdgeHighlight(thickness);
         break;
         
       default:
         console.log('[ColorGuard] Unknown mode:', settings.mode);
+    }
+  }
+  
+  /**
+   * Apply edge highlighting using CSS outline injection
+   * More reliable than canvas for interactive elements
+   */
+  let edgeStyleElement = null;
+  
+  function applyEdgeHighlight(thickness) {
+    removeEdgeCanvas();
+    
+    // Create or update style element
+    if (!edgeStyleElement) {
+      edgeStyleElement = document.createElement('style');
+      edgeStyleElement.id = 'colorguard-edge-styles';
+      document.head.appendChild(edgeStyleElement);
+    }
+    
+    // CSS to highlight interactive elements
+    const outlineColor = '#FFD700'; // Gold/yellow for visibility
+    const outlineStyle = `${thickness}px solid ${outlineColor}`;
+    
+    edgeStyleElement.textContent = `
+      /* ColorGuard Edge Highlighting */
+      a:not([href=""]),
+      button:not([disabled]),
+      input:not([type="hidden"]):not([disabled]),
+      select:not([disabled]),
+      textarea:not([disabled]),
+      [role="button"]:not([aria-disabled="true"]),
+      [role="link"],
+      [onclick],
+      [tabindex]:not([tabindex="-1"]) {
+        outline: ${outlineStyle} !important;
+        outline-offset: 1px !important;
+      }
+      
+      /* Focus state - make it even more visible */
+      a:focus,
+      button:focus,
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: ${thickness + 1}px solid #FF6B00 !important;
+        outline-offset: 2px !important;
+        box-shadow: 0 0 8px ${outlineColor} !important;
+      }
+    `;
+    
+    console.log('[ColorGuard] ✓ Edge highlighting applied with', thickness + 'px outlines');
+  }
+  
+  /**
+   * Remove edge canvas and style elements
+   */
+  function removeEdgeCanvas() {
+    // Remove any canvas elements
+    const canvas = document.getElementById('colorguard-edge-canvas');
+    if (canvas) {
+      canvas.remove();
+    }
+    
+    // Remove style element
+    if (edgeStyleElement) {
+      edgeStyleElement.remove();
+      edgeStyleElement = null;
     }
   }
   
@@ -143,7 +212,11 @@ console.log('[ColorGuard] Content script file loaded!');
     // Clear all CSS filters
     document.documentElement.style.filter = '';
     document.documentElement.style.webkitFilter = '';
-    console.log('[ColorGuard] Filters cleared, overlay deactivated');
+    
+    // Remove edge highlighting
+    removeEdgeCanvas();
+    
+    console.log('[ColorGuard] All filters cleared, overlay deactivated');
     
     overlayActive = false;
   }
