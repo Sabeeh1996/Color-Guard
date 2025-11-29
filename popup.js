@@ -111,6 +111,27 @@
       });
     });
     
+    // Turn off all modes
+    const turnOffAllBtn = document.getElementById('turnOffAll');
+    turnOffAllBtn.addEventListener('click', async () => {
+      currentSettings.enableHighContrast = false;
+      currentSettings.enableHueShift = false;
+      currentSettings.enableEdgeHighlight = false;
+      
+      await chrome.runtime.sendMessage({
+        action: 'updateSettings',
+        settings: currentSettings
+      });
+      
+      updateUI();
+      
+      // Visual feedback
+      turnOffAllBtn.textContent = '✓ All Off';
+      setTimeout(() => {
+        turnOffAllBtn.textContent = '⏹️ Turn Off All';
+      }, 1000);
+    });
+    
     // Open options page
     openOptionsBtn.addEventListener('click', () => {
       chrome.runtime.openOptionsPage();

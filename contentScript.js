@@ -188,10 +188,11 @@ console.log('[ColorGuard] Content script file loaded!');
     }
     
     // Remove style element
-    if (edgeStyleElement) {
-      edgeStyleElement.remove();
-      edgeStyleElement = null;
+    const styleEl = document.getElementById('colorguard-edge-styles');
+    if (styleEl) {
+      styleEl.remove();
     }
+    edgeStyleElement = null;
   }
   
   /**
