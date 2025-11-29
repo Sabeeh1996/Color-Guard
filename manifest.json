@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ColorGuard — Color-Blind Accessibility Layer",
   "version": "1.0.0",
-  "description": "Fast, non-invasive accessibility overlay for users with red-green color blindness and low vision. High-contrast, hue adjustment, and edge highlighting modes.",
+  "description": "Accessibility for color blindness & low vision. High-contrast, hue-shift, and edge highlighting modes. Combine for best results.",
   
   "permissions": [
     "storage",
