@@ -211,7 +211,7 @@ function applyFilter(settings) {
 
 - 📖 **Read the docs**: Check [README.md](./README.md) and [Wiki](https://github.com/Sabeeh1996/Color-Guard/wiki)
 - 💬 **Join discussions**: [GitHub Discussions](https://github.com/Sabeeh1996/Color-Guard/discussions)
-- 📧 **Email**: sabeeh.colorguard@gmail.com
+- 📧 **Email**: muhammadsabeeh1996@gmail.com
 
 ### Recognition
 

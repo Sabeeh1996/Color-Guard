@@ -380,7 +380,7 @@ Open an issue on our [GitHub Issues page](https://github.com/Sabeeh1996/Color-Gu
 - 📖 **Documentation**: [GitHub Wiki](https://github.com/Sabeeh1996/Color-Guard/wiki)
 - 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Sabeeh1996/Color-Guard/issues)
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/Sabeeh1996/Color-Guard/discussions)
-- 📧 **Email**: sabeeh.colorguard@gmail.com
+- 📧 **Email**: muhammadsabeeh1996@gmail.com
 
 ### Links
 - 🌐 **Website**: [https://sabeeh1996.github.io/Color-Guard/](https://sabeeh1996.github.io/Color-Guard/)
