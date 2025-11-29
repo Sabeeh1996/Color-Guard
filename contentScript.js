@@ -248,13 +248,16 @@ console.log('[ColorGuard] Content script file loaded!');
     if (message.action === 'modeChanged') {
       // Keyboard shortcut or popup changed the mode
       console.log('[ColorGuard] Mode changed to:', message.mode);
-      applySettings({ ...currentSettings, mode: message.mode });
-      sendResponse({ success: true });
-      return true;
+      // Fetch latest settings to ensure we have current contrast/hue/thickness values
+      chrome.storage.sync.get(null, (fullSettings) => {
+        applySettings({ ...fullSettings, mode: message.mode });
+        sendResponse({ success: true });
+      });
+      return true; // Async response
     }
     
     if (message.action === 'settingsUpdated') {
-      // Options page updated settings
+      // Options page updated settings - includes all current values
       console.log('[ColorGuard] Settings updated:', message.settings);
       applySettings(message.settings);
       sendResponse({ success: true });
@@ -268,15 +271,28 @@ console.log('[ColorGuard] Content script file loaded!');
   /**
    * Listen for storage changes directly (backup mechanism)
    * Service worker messages are primary, but this catches edge cases
+   * This ensures real-time updates when sliders are moved in options page
    */
   chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'sync' && currentSettings) {
-      // Rebuild settings object with changes
+      // Rebuild settings object with all changes
       const updatedSettings = { ...currentSettings };
+      
       for (const [key, { newValue }] of Object.entries(changes)) {
         updatedSettings[key] = newValue;
+        console.log('[ColorGuard] Storage changed:', key, '→', newValue);
       }
-      applySettings(updatedSettings);
+      
+      // Only reapply if mode is active and relevant settings changed
+      const relevantKeys = ['mode', 'contrastLevel', 'hueShiftAmount', 'outlineThickness'];
+      const relevantChange = Object.keys(changes).some(key => relevantKeys.includes(key));
+      
+      if (relevantChange && updatedSettings.mode !== 'off') {
+        console.log('[ColorGuard] Reapplying due to settings change');
+        applySettings(updatedSettings);
+      } else if (changes.mode && changes.mode.newValue === 'off') {
+        deactivateOverlay();
+      }
     }
   });
   

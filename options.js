@@ -254,20 +254,55 @@
   }
   
   /**
+   * Apply a single setting change in real-time
+   * Updates storage and broadcasts to all tabs immediately
+   */
+  async function applySettingRealTime(key, value) {
+    try {
+      // Save just this setting to storage
+      const update = {};
+      update[key] = value;
+      await chrome.storage.sync.set(update);
+      
+      // Broadcast to all tabs via service worker
+      await chrome.runtime.sendMessage({
+        action: 'updateSettings',
+        settings: { ...currentSettings }
+      });
+      
+      console.log('[Options] Real-time update:', key, '=', value);
+    } catch (error) {
+      console.error('Real-time update error:', error);
+    }
+  }
+  
+  /**
    * Attach event listeners
    */
   function attachListeners() {
-    // Slider value updates
+    // Slider value updates with real-time preview
     contrastSlider.addEventListener('input', (e) => {
-      contrastValue.textContent = parseFloat(e.target.value).toFixed(1) + 'x';
+      const value = parseFloat(e.target.value);
+      contrastValue.textContent = value.toFixed(1) + 'x';
+      // Update setting and apply in real-time
+      currentSettings.contrastLevel = value;
+      applySettingRealTime('contrastLevel', value);
     });
     
     hueSlider.addEventListener('input', (e) => {
-      hueValue.textContent = e.target.value + '°';
+      const value = parseInt(e.target.value);
+      hueValue.textContent = value + '°';
+      // Update setting and apply in real-time
+      currentSettings.hueShiftAmount = value;
+      applySettingRealTime('hueShiftAmount', value);
     });
     
     outlineSlider.addEventListener('input', (e) => {
-      outlineValue.textContent = e.target.value + 'px';
+      const value = parseInt(e.target.value);
+      outlineValue.textContent = value + 'px';
+      // Update setting and apply in real-time
+      currentSettings.outlineThickness = value;
+      applySettingRealTime('outlineThickness', value);
     });
     
     // Global enabled toggle
