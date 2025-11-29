@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorGuard - Privacy Policy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #202124;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            color: #5f6368;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        h2 {
+            color: #202124;
+            font-size: 1.8rem;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e8f0fe;
+        }
+
+        h3 {
+            color: #1a73e8;
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #3c4043;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #3c4043;
+        }
+
+        .highlight-box {
+            background: #e8f0fe;
+            border-left: 4px solid #1a73e8;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .privacy-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .section-icon {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #f1f3f4;
+            font-weight: 600;
+            color: #202124;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #5f6368;
+        }
+
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .contact-box a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkmark {
+            color: #34a853;
+            font-weight: bold;
+        }
+
+        .crossmark {
+            color: #ea4335;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="icons/icon48.png" alt="ColorGuard Logo" class="logo" onerror="this.style.display='none'">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: November 30, 2025</p>
+        </div>
+
+        <div class="highlight-box">
+            <h3><span class="privacy-icon">🔒</span>Privacy First</h3>
+            <p><strong>ColorGuard is designed with privacy as a core principle.</strong> All processing happens locally on your device. We do not collect, store, transmit, or sell any personal data or browsing information.</p>
+        </div>
+
+        <h2><span class="section-icon">📋</span>Summary</h2>
+        <p>This privacy policy explains how ColorGuard handles your information when you use our Chrome extension. The key takeaway: <strong>we don't collect anything</strong>.</p>
+
+        <table>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+            <tr>
+                <td>Do you collect personal information?</td>
+                <td><span class="crossmark">✗</span> No</td>
+            </tr>
+            <tr>
+                <td>Do you track browsing history?</td>
+                <td><span class="crossmark">✗</span> No</td>
+            </tr>
+            <tr>
+                <td>Do you use analytics or cookies?</td>
+                <td><span class="crossmark">✗</span> No</td>
+            </tr>
+            <tr>
+                <td>Is data sent to external servers?</td>
+                <td><span class="crossmark">✗</span> No</td>
+            </tr>
+            <tr>
+                <td>Is the source code open?</td>
+                <td><span class="checkmark">✓</span> Yes</td>
+            </tr>
+        </table>
+
+        <h2><span class="section-icon">💾</span>Data Storage</h2>
+        
+        <h3>What We Store Locally</h3>
+        <p>ColorGuard stores the following settings on your device using Chrome's local storage API (<code>chrome.storage.sync</code>):</p>
+        
+        <ul>
+            <li><strong>Accessibility Mode:</strong> Your selected mode (Off, High-Contrast, Hue-Shift, or Edge-Highlight)</li>
+            <li><strong>Mode Settings:</strong> Contrast level, hue shift amount, and edge outline thickness</li>
+            <li><strong>Site Preferences:</strong> Your whitelist and blacklist of domains</li>
+            <li><strong>General Settings:</strong> Whether global mode is enabled and click capture preference</li>
+        </ul>
+
+        <h3>Where Is Data Stored?</h3>
+        <p>All settings are stored locally in your Chrome browser using <code>chrome.storage.sync</code>. This means:</p>
+        <ul>
+            <li><span class="checkmark">✓</span> Data stays on your device</li>
+            <li><span class="checkmark">✓</span> Data syncs across your Chrome browsers (if Chrome sync is enabled)</li>
+            <li><span class="checkmark">✓</span> Data is managed by Google's Chrome sync service (not by us)</li>
+            <li><span class="checkmark">✓</span> You can delete all data by uninstalling the extension</li>
+        </ul>
+
+        <h2><span class="section-icon">🔐</span>Permissions Explained</h2>
+        
+        <p>ColorGuard requests the following Chrome permissions. Here's why we need each one:</p>
+
+        <table>
+            <tr>
+                <th>Permission</th>
+                <th>Purpose</th>
+                <th>Privacy Impact</th>
+            </tr>
+            <tr>
+                <td><code>storage</code></td>
+                <td>Save your settings locally</td>
+                <td>None - data stays on your device</td>
+            </tr>
+            <tr>
+                <td><code>activeTab</code></td>
+                <td>Apply filters to the current tab</td>
+                <td>None - no data collected</td>
+            </tr>
+            <tr>
+                <td><code>scripting</code></td>
+                <td>Inject content scripts for accessibility</td>
+                <td>None - scripts run locally</td>
+            </tr>
+            <tr>
+                <td><code>&lt;all_urls&gt;</code></td>
+                <td>Apply filters on all websites you visit</td>
+                <td>None - no tracking or data collection</td>
+            </tr>
+        </table>
+
+        <h2><span class="section-icon">🌐</span>Network Activity</h2>
+        
+        <h3>External Connections</h3>
+        <p><strong>ColorGuard makes ZERO network requests.</strong></p>
+        
+        <ul>
+            <li><span class="crossmark">✗</span> No analytics services</li>
+            <li><span class="crossmark">✗</span> No advertising networks</li>
+            <li><span class="crossmark">✗</span> No tracking pixels</li>
+            <li><span class="crossmark">✗</span> No third-party APIs</li>
+            <li><span class="crossmark">✗</span> No telemetry or crash reporting</li>
+        </ul>
+
+        <p>All accessibility processing happens entirely on your device using local JavaScript and CSS filters.</p>
+
+        <h2><span class="section-icon">👁️</span>What We Don't See</h2>
+        
+        <p>Because everything runs locally, we have no visibility into:</p>
+        <ul>
+            <li>Which websites you visit</li>
+            <li>What content you view</li>
+            <li>How you use the extension</li>
+            <li>Your browsing patterns or history</li>
+            <li>Any personal information</li>
+            <li>Login credentials or form data</li>
+        </ul>
+
+        <h2><span class="section-icon">🔄</span>Chrome Sync</h2>
+        
+        <p>If you have Chrome sync enabled in your browser settings, your ColorGuard preferences will sync across your Chrome browsers. This is handled entirely by Google's Chrome sync service:</p>
+        
+        <ul>
+            <li>We don't control or have access to this sync mechanism</li>
+            <li>Data is encrypted by Google during sync</li>
+            <li>You can disable sync in Chrome settings</li>
+            <li>Refer to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a> for details on Chrome sync</li>
+        </ul>
+
+        <h2><span class="section-icon">🛡️</span>Security</h2>
+        
+        <p>ColorGuard is designed with security in mind:</p>
+        
+        <ul>
+            <li><strong>No External Dependencies:</strong> Uses only vanilla JavaScript and Chrome APIs</li>
+            <li><strong>Content Security Policy:</strong> Respects website CSP restrictions</li>
+            <li><strong>Open Source:</strong> Full source code available for security review on <a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank">GitHub</a></li>
+            <li><strong>Minimal Permissions:</strong> Requests only necessary permissions</li>
+            <li><strong>Local Processing:</strong> No server-side components that could be compromised</li>
+        </ul>
+
+        <h2><span class="section-icon">👶</span>Children's Privacy</h2>
+        
+        <p>ColorGuard does not knowingly collect any information from anyone, including children under 13. The extension does not require account creation or personal information from users of any age.</p>
+
+        <h2><span class="section-icon">🌍</span>International Users</h2>
+        
+        <p>Since ColorGuard doesn't collect or transmit any data, there are no international data transfer concerns. All processing happens locally on your device regardless of your location.</p>
+
+        <h2><span class="section-icon">📝</span>Changes to This Policy</h2>
+        
+        <p>If we make changes to this privacy policy, we will:</p>
+        <ul>
+            <li>Update the "Last Updated" date at the top</li>
+            <li>Post the new policy in the extension package</li>
+            <li>Notify users through the extension update notes</li>
+        </ul>
+
+        <p>However, our commitment to privacy is fundamental: <strong>we will never collect user data or compromise your privacy.</strong></p>
+
+        <h2><span class="section-icon">❓</span>Your Rights</h2>
+        
+        <p>Since we don't collect any personal data, traditional data rights (access, deletion, portability) don't apply. However:</p>
+        
+        <ul>
+            <li><strong>You control your data:</strong> All settings are stored locally on your device</li>
+            <li><strong>You can export settings:</strong> Use Chrome's extension data export features</li>
+            <li><strong>You can delete everything:</strong> Uninstall the extension to remove all stored settings</li>
+            <li><strong>You can review the code:</strong> Inspect our <a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank">open-source repository</a></li>
+        </ul>
+
+        <h2><span class="section-icon">📧</span>Contact Us</h2>
+        
+        <div class="contact-box">
+            <p>If you have questions about this privacy policy or ColorGuard's data practices:</p>
+            <p style="margin-top: 15px;">
+                <strong>Email:</strong> <a href="mailto:sabeeh.colorguard@gmail.com">sabeeh.colorguard@gmail.com</a><br>
+                <strong>GitHub:</strong> <a href="https://github.com/Sabeeh1996/Color-Guard/issues" target="_blank">Open an Issue</a><br>
+                <strong>Website:</strong> <a href="https://sabeeh1996.github.io/Color-Guard/" target="_blank">ColorGuard Homepage</a>
+            </p>
+        </div>
+
+        <h2><span class="section-icon">⚖️</span>Legal</h2>
+        
+        <h3>License</h3>
+        <p>ColorGuard is released under the MIT License. See the <a href="https://github.com/Sabeeh1996/Color-Guard/blob/main/LICENSE" target="_blank">LICENSE file</a> for details.</p>
+
+        <h3>Disclaimer</h3>
+        <p>ColorGuard is provided "as is" without warranty of any kind. While we strive to make the web more accessible, we cannot guarantee the extension will work on all websites or meet all accessibility needs.</p>
+
+        <h3>Third-Party Services</h3>
+        <p>ColorGuard does not integrate with any third-party services. The only external service involved is Chrome's sync functionality, which is controlled by Google and subject to their privacy policy.</p>
+
+        <div class="highlight-box" style="margin-top: 40px;">
+            <h3><span class="privacy-icon">✅</span>Our Privacy Promise</h3>
+            <p><strong>We will never:</strong></p>
+            <ul style="margin-top: 10px;">
+                <li>Collect your personal information</li>
+                <li>Track your browsing activity</li>
+                <li>Sell your data to third parties</li>
+                <li>Display ads or sponsored content</li>
+                <li>Require account creation or login</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>ColorGuard is built for you, not for data collection.</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>
+                <a href="help.html">Help Center</a> •
+                <a href="https://github.com/Sabeeh1996/Color-Guard" target="_blank">GitHub</a> •
+                <a href="https://sabeeh1996.github.io/Color-Guard/" target="_blank">Website</a> •
+                <a href="mailto:sabeeh.colorguard@gmail.com">Contact</a>
+            </p>
+            <p style="margin-top: 15px;">Made with ❤️ for a more accessible web</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">© 2025 ColorGuard. Licensed under MIT.</p>
+        </div>
+    </div>
+</body>
+</html>
