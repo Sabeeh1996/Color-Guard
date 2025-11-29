@@ -119,20 +119,20 @@
     const newMode = e.target.value;
     
     try {
-      // Update settings
+      // Update mode in current settings
       currentSettings.mode = newMode;
       
       // Save to storage and notify service worker
-      // This will immediately broadcast to all tabs
+      // Send complete settings object to ensure contrast/hue/edge values are included
       await chrome.runtime.sendMessage({
         action: 'updateSettings',
-        settings: { mode: newMode }
+        settings: currentSettings
       });
       
       // Update UI
       updateUI();
       
-      console.log('Mode changed to:', newMode);
+      console.log('Mode changed to:', newMode, 'with settings:', currentSettings);
       
       // Show visual confirmation
       const modeOption = document.querySelector(`.mode-option[data-mode="${newMode}"]`);

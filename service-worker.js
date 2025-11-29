@@ -70,15 +70,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   
   if (message.action === 'updateSettings') {
     // Update settings and notify all tabs
-    chrome.storage.sync.set(message.settings).then(async () => {
+    // First get current settings, then merge with new ones to avoid losing values
+    chrome.storage.sync.get(DEFAULT_SETTINGS).then(async (currentSettings) => {
+      // Merge new settings with current ones
+      const updatedSettings = { ...currentSettings, ...message.settings };
+      
+      // Save merged settings
+      await chrome.storage.sync.set(updatedSettings);
+      
+      console.log('[ServiceWorker] Settings updated:', updatedSettings);
+      
       // Ensure content scripts are injected in all tabs
       await ensureContentScriptsInjected();
       
-      // Broadcast to all tabs
+      // Broadcast complete settings to all tabs
       await broadcastToAllTabs({ 
         action: 'settingsUpdated', 
-        settings: message.settings 
+        settings: updatedSettings 
       });
+      
       sendResponse({ success: true });
     });
     return true; // Indicate async response
